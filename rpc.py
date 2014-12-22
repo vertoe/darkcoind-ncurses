@@ -26,9 +26,9 @@ def init(interface_queue, cfg):
         if cfg.get('rpcport'):
             rpcport = cfg.get('rpcport')
         elif cfg.get('testnet') == "1":
-            rpcport = '18332'
+            rpcport = '19998'
         else:
-            rpcport = '8332'
+            rpcport = '9998'
 
         if cfg.get('rpcssl') == "1":
             protocol = "https"

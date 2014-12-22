@@ -3,7 +3,7 @@ darkcoind-ncurses v0.0.22
 
 ncurses front-end for darkcoind
 
-![ScreenShot](/screenshots/bitcoind-ncurses-splash.png)
+![ScreenShot](/screenshots/darkcoind-ncurses-splash.png)
 ![ScreenShot](/screenshots/bitcoind-ncurses-monitor.png)
 ![ScreenShot](/screenshots/bitcoind-ncurses-block.png)
 ![ScreenShot](/screenshots/bitcoind-ncurses-tx.png)
@@ -64,7 +64,6 @@ todo
 * fix fees calculation for darkcoin (subsidy)
 * fix ipv6 address display in Peers tab
 * fix version string length in Peers tab
-* update splash with darkcoin logo ;)
 * update screenshots with darkcoind
 * ensure terminal always returns to sane state on program exit
 * mean block size/tx count over last X blocks

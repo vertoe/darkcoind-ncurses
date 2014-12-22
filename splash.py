@@ -3,12 +3,12 @@ import curses
 import global_mod as g
 
 splash_array = [
-    "  BB            BB                                   BB",
-    "  BB       BB   BB    BBBB    BBBB   BB  BB BB       BB",
-    "  BBBBB        BBBB  BB     BB   BB      BBB BB   BBBBB",
-    "  BB   BB  BB   BB   BB     BB   BB  BB  BB  BB  BB  BB",
-    "  BBB  BB  BB   BB   BB     BB   BB  BB  BB  BB  BB  BB",
-    "  BB BBB   BB    BB   BBBB    BBBB   BB  BB  BB    BBBB",
+    "       BB                    BB                                        BB",
+    "       BB    BBBBB  BB BBB   BB        BBBB    BBBB   BB  BB BB        BB",
+    "    BBBBB   BB  BB  BBB   B  BB BBB   BB     BB   BB      BBB BB    BBBBB",
+    "  BB   BB  BB   BB  BB       BBBB     BB     BB   BB  BB  BB  BB  BB   BB",
+    "  BB  BBB  BB  BBB  BB       BB  BB   BB     BB   BB  BB  BB  BB  BB  BBB",
+    "   BBB BB   BBB BB  BB       BB   BB   BBBB    BBBB   BB  BB  BB   BBB BB",
 ]
 
 def draw_window(state, window):
@@ -16,10 +16,10 @@ def draw_window(state, window):
     window.refresh()
     win_splash = curses.newwin(12, 76, 0, 0)
 
-    color = curses.color_pair(0)
+    color = curses.color_pair(2)
     if 'testnet' in state:
-        if state['testnet']: color = curses.color_pair(2)
-        else: color = curses.color_pair(1)
+        if state['testnet']: color = curses.color_pair(3)
+        else: color = curses.color_pair(2)
 
     y = 0
     while y < len(splash_array):

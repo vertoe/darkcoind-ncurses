@@ -75,7 +75,7 @@ def draw_input_window(state, window, rpc_queue):
         if state['testnet']: color = curses.color_pair(2)
 
     window.clear()
-    window.addstr(0, 1, "bitcoind-ncurses " + g.version + " [block input mode]", color + curses.A_BOLD)
+    window.addstr(0, 1, "darkcoind-ncurses " + g.version + " [block input mode]", color + curses.A_BOLD)
     window.addstr(1, 1, "please enter block height or hash", curses.A_BOLD)
     window.addstr(2, 1, "or timestamp (accepted formats: YYYY-MM-DD hh:mm:ss, YYYY-MM-DD)", curses.A_BOLD)
     window.refresh()
@@ -88,13 +88,13 @@ def draw_input_window(state, window, rpc_queue):
         entered_block_timestamp = calendar.timegm(entered_block_time)
     except: pass
 
-    try: 
+    try:
         entered_block_time = time.strptime(entered_block, "%Y-%m-%d %H:%M:%S")
         entered_block_timestamp = calendar.timegm(entered_block_time)
     except: pass
 
     if entered_block_timestamp:
-        s = {'findblockbytimestamp': entered_block_timestamp} 
+        s = {'findblockbytimestamp': entered_block_timestamp}
         rpc_queue.put(s)
 
         window.addstr(5, 1, "waiting for block (will stall here if not found)", color + curses.A_BOLD)

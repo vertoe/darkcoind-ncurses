@@ -72,7 +72,7 @@ def loop(interface_queue, rpc_queue):
     curses.nocbreak()
     curses.endwin()
     rpc_queue.put({ 'stop': True })
-    
+
     if error_message:
-        sys.stderr.write("bitcoind-ncurses encountered an error\n")
+        sys.stderr.write("darkcoind-ncurses encountered an error\n")
         sys.stderr.write("Message: " + error_message + "\n")

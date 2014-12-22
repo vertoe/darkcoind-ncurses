@@ -13,13 +13,13 @@ def draw_window(state, old_window):
     if 'version' in state:
         if state['testnet'] == 1:
             color = curses.color_pair(2)
-            window.addstr(1, 1, "bitcoind v" + state['version'] + " (testnet)", color + curses.A_BOLD)
+            window.addstr(1, 1, "darkcoind v" + state['version'] + " (testnet)", color + curses.A_BOLD)
             unit = 'TNC'
         else:
             color = curses.color_pair(1)
-            window.addstr(1, 1, "bitcoind v" + state['version'] + " ", color + curses.A_BOLD)
+            window.addstr(1, 1, "darkcoind v" + state['version'] + " ", color + curses.A_BOLD)
             unit = 'BTC'
-        window.addstr(0, 1, "bitcoind-ncurses " + g.version, color + curses.A_BOLD)
+        window.addstr(0, 1, "darkcoind-ncurses " + g.version, color + curses.A_BOLD)
 
     if 'peers' in state:
         if state['peers'] > 0:

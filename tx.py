@@ -44,7 +44,7 @@ def draw_window(state, window):
 
     else:
         win_header.addstr(0, 1, "no transaction loaded", curses.A_BOLD + curses.color_pair(3))
-        win_header.addstr(1, 1, "if you have entered one, consider running bitcoind with -txindex", curses.A_BOLD)
+        win_header.addstr(1, 1, "if you have entered one, consider running darkcoind with -txindex", curses.A_BOLD)
         win_header.addstr(2, 1, "press 'G' to enter a txid", curses.A_BOLD)
 
     win_header.refresh()
@@ -150,7 +150,7 @@ def draw_input_window(state, window, rpc_queue):
         if state['testnet']: color = curses.color_pair(2)
 
     window.clear()
-    window.addstr(0, 1, "bitcoind-ncurses " + g.version + " [transaction input mode]", color + curses.A_BOLD)
+    window.addstr(0, 1, "darkcoind-ncurses " + g.version + " [transaction input mode]", color + curses.A_BOLD)
     window.addstr(1, 1, "please enter txid", curses.A_BOLD)
     window.refresh()
 

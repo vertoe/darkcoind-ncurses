@@ -13,7 +13,7 @@ def log(logfile, loglevel, string):
 
     with open(logfile, 'a') as f:
         f.write(string_time + ' LL' + str(loglevel) + ' ' + string + '\n')
-    
+
 def stop(interface_queue, error_message):
     interface_queue.put({'stop': error_message})
 
@@ -66,7 +66,7 @@ def rpcrequest(rpchandle, request, interface_queue, *args):
 
 def getblock(rpchandle, interface_queue, block_to_get, queried = False, new = False):
     try:
-        if (len(str(block_to_get)) < 7) and str(block_to_get).isdigit(): 
+        if (len(str(block_to_get)) < 7) and str(block_to_get).isdigit():
             blockhash = rpcrequest(rpchandle, 'getblockhash', False, block_to_get)
         elif len(block_to_get) == 64:
             blockhash = block_to_get
@@ -90,16 +90,16 @@ def loop(interface_queue, rpc_queue, cfg):
     # TODO: add error checking for broken config, improve exceptions
     rpchandle = init(interface_queue, cfg)
     if not rpchandle: # TODO: this doesn't appear to trigger, investigate
-        stop(interface_queue, "failed to connect to bitcoind (handle not obtained)")
+        stop(interface_queue, "failed to connect to darkcoind (handle not obtained)")
         return True
 
     update_interval = 2 # seconds
 
     last_update = time.time() - update_interval
-    
+
     info = rpcrequest(rpchandle, 'getinfo', interface_queue)
     if not info:
-        stop(interface_queue, "failed to connect to bitcoind (getinfo failed)")
+        stop(interface_queue, "failed to connect to darkcoind (getinfo failed)")
         return True
 
     log('debug.log', 1, 'CONNECTED')
@@ -194,7 +194,7 @@ def loop(interface_queue, rpc_queue, cfg):
                         except:
                             pass
 
-            except: 
+            except:
                 tx = {'txid': s['txid'], 'size': -1}
 
             interface_queue.put(tx)
@@ -211,18 +211,18 @@ def loop(interface_queue, rpc_queue, cfg):
         elif 'findblockbytimestamp' in s:
             request = s['findblockbytimestamp']
 
-            # initializing the while loop 
+            # initializing the while loop
             block_to_try = 0
-            delta = 10000 
+            delta = 10000
             iterations = 0
- 
+
             while abs(delta) > 3600 and iterations < 15: # one day
                 block = getblock(rpchandle, interface_queue, block_to_try, True)
                 if not block:
                     break
 
                 delta = request - block['time']
-                block_to_try += int(delta / 600) # guess 10 mins per block. seems to work on testnet anyway 
+                block_to_try += int(delta / 600) # guess 10 mins per block. seems to work on testnet anyway
 
                 if (block_to_try < 0):
                     block = getblock(rpchandle, interface_queue, 0, True)
@@ -269,8 +269,8 @@ def loop(interface_queue, rpc_queue, cfg):
                                     coinbase_amount += output['value']
 
                             interface_queue.put({"coinbase": coinbase_amount, "height": blockcount})
-                            
-                        except: pass 
+
+                        except: pass
 
                     try:
                         nethash144 = rpcrequest(rpchandle, 'getnetworkhashps', False, 144)

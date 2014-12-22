@@ -135,10 +135,10 @@ def listsinceblock(s, state, window):
 
     state['wallet']['transactions'].sort(key=lambda entry: entry['nonce'], reverse=True)
 
-    unit = 'BTC'
+    unit = 'DRK'
     if 'testnet' in state:
         if state['testnet']:
-            unit = 'TNC'
+            unit = 'tDRK'
 
     for entry in state['wallet']['transactions']:
         if 'txid' in entry:

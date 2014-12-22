@@ -11,10 +11,10 @@ def draw_window(state, window):
     window.refresh()
     win_header = curses.newwin(3, 75, 0, 0)
 
-    unit = 'BTC'
+    unit = 'DRK'
     if 'testnet' in state:
         if state['testnet']:
-            unit = 'TNC'
+            unit = 'tDRK'
     if 'tx' in state:
         win_header.addstr(0, 1, "txid: " + state['tx']['txid'], curses.A_BOLD)
         win_header.addstr(1, 1, str(state['tx']['size']) + " bytes (" + str(state['tx']['size']/1024) + " KB)       ", curses.A_BOLD)

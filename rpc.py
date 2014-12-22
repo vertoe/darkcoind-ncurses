@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from bitcoinrpc.authproxy import AuthServiceProxy
+from darkcoinrpc.authproxy import AuthServiceProxy
 import curses, time, Queue, decimal
 
 def log(logfile, loglevel, string):

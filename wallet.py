@@ -9,10 +9,10 @@ def draw_window(state, window):
     window.refresh()
     win_header = curses.newwin(2, 76, 0, 0)
 
-    unit = 'BTC'
+    unit = 'DRK'
     if 'testnet' in state:
         if state['testnet']:
-            unit = 'TNC'
+            unit = 'tDRK'
 
     if 'wallet' in state:
         if 'balance' in state:

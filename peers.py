@@ -48,8 +48,8 @@ def draw_peers(state):
                         # syncnodes are outgoing only
                         win_peers.addstr(index-offset, 1, 'S')
 
-                win_peers.addstr(index-offset, 3, peer['addr'].replace(".onion","").replace(":8333","").replace(":18333","")[:21])
-                win_peers.addstr(index-offset, 24, peer['subver'].strip("/").replace("Satoshi:","Sat")[:10])
+                win_peers.addstr(index-offset, 3, peer['addr'].replace(".onion","").replace(":9999","").replace(":19999","")[:21])
+                win_peers.addstr(index-offset, 24, peer['subver'].strip("/").replace("Satoshi:","Sat").replace("Duffield:","Duf")[:10])
 
                 mbrecv = "% 7.1f" % ( float(peer['bytesrecv']) / 1048576 )
                 mbsent = "% 7.1f" % ( float(peer['bytessent']) / 1048576 )

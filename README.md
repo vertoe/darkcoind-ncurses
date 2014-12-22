@@ -58,6 +58,14 @@ $ python main.py -c some_other_config_file.conf
 todo
 ----
 
+* disable Net tab if version < 0.11.x
+* disable Forks tab if version < 0.11.x
+* fix hashrate calculation for darkcoin
+* fix fees calculation for darkcoin (subsidy)
+* fix ipv6 address display in Peers tab
+* fix version string length in Peers tab
+* update splash with darkcoin logo ;)
+* update screenshots with darkcoind
 * ensure terminal always returns to sane state on program exit
 * mean block size/tx count over last X blocks
 * transaction creation support (if I feel suicidal)
@@ -66,7 +74,7 @@ todo
 frog food
 ---------
 
-found darkcoind-ncurses useful? donations are your way of showing that!
+found bitcoind-ncurses useful? donations are your way of showing that! (Donations for azeteki.)
 
 my main machine is currently a 6 year old Atom laptop. upgrading that would be rather useful. cheers!
 

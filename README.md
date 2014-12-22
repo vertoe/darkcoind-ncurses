@@ -18,7 +18,7 @@ produced by Amphibian (azeteki, Atelopus_zeteki)
 dependencies
 ------------
 
-* tested with python 2.7.3, darkcoind 0.10.17.24
+* tested with python 2.7.9, darkcoind 0.10.17.24
 * jgarzik's bitcoinrpc library port for darkcoin (https://github.com/vertoe/python-darkcoinrpc)
 * (Windows only) python ncurses library (http://www.lfd.uci.edu/~gohlke/pythonlibs/#curses)
 

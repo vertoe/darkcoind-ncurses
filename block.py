@@ -131,4 +131,4 @@ def draw_input_window(state, window, rpc_queue):
 
         window.clear()
         window.refresh()
-        state['mode'] = "monitor"
+        state['mode'] = "overview"

@@ -13,13 +13,15 @@ ncurses front-end for darkcoind
 ![ScreenShot](/screenshots/bitcoind-ncurses-forks.png)
 ![ScreenShot](/screenshots/bitcoind-ncurses-console.png)
 
-produced by Amphibian (azeteki, Atelopus_zeteki)
+* produced by Amphibian (azeteki, Atelopus_zeteki).
+* ported for darkcoind by Vertoe (vertoe).
 
 dependencies
 ------------
 
 * tested with python 2.7.9, darkcoind 0.10.17.24
 * jgarzik's bitcoinrpc library port for darkcoin (https://github.com/vertoe/python-darkcoinrpc)
+* chaeplin's darkcoin subsidy library (https://github.com/vertoe/p2pool-drk/tree/master/darkcoin-subsidy-python)
 * (Windows only) python ncurses library (http://www.lfd.uci.edu/~gohlke/pythonlibs/#curses)
 
 features
@@ -58,10 +60,6 @@ $ python main.py -c some_other_config_file.conf
 todo
 ----
 
-* disable Net tab if version < 0.11.x
-* disable Forks tab if version < 0.11.x
-* fix hashrate calculation for darkcoin
-* fix fees calculation for darkcoin (subsidy)
 * fix ipv6 address display in Peers tab
 * fix version string length in Peers tab
 * update screenshots with darkcoind
@@ -73,7 +71,7 @@ todo
 frog food
 ---------
 
-found bitcoind-ncurses useful? donations are your way of showing that! (Donations for azeteki.)
+found bitcoind-ncurses useful? donations are your way of showing that! (donations for Amphibian, author of bitcoind-ncurses.)
 
 my main machine is currently a 6 year old Atom laptop. upgrading that would be rather useful. cheers!
 

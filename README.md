@@ -58,9 +58,6 @@ $ python main.py -c some_other_config_file.conf
 todo
 ----
 
-* fix ipv6 address display in Peers tab
-* fix version string length in Peers tab
-* update screenshots with darkcoind
 * ensure terminal always returns to sane state on program exit
 * mean block size/tx count over last X blocks
 * transaction creation support (if I feel suicidal)
@@ -69,9 +66,9 @@ todo
 frog food
 ---------
 
-found bitcoind-ncurses useful? donations are your way of showing that! (donations for Amphibian, author of bitcoind-ncurses.)
+found bitcoind-ncurses useful? donations are your way of showing that! (donations for Amphibian, author of bitcoind-ncurses, of course.)
 
-my main machine is currently a 6 year old Atom laptop. upgrading that would be rather useful. cheers!
+his main machine is currently a 6 year old Atom laptop. upgrading that would be rather useful. cheers!
 
 ![ScreenShot](/screenshots/donation-qr.png)
 

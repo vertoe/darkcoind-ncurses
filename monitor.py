@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 import curses, time, math
+import darkcoin_subsidy as ds
 
-import global_mod as g
+import global_mod as gm
 import footer
+
 
 def draw_window(state, old_window):
     # TODO: only draw parts that actually changed
@@ -19,7 +21,7 @@ def draw_window(state, old_window):
             color = curses.color_pair(1)
             window.addstr(1, 1, "darkcoind v" + state['version'] + " ", color + curses.A_BOLD)
             unit = 'DRK'
-        window.addstr(0, 1, "darkcoind-ncurses " + g.version, color + curses.A_BOLD)
+        window.addstr(0, 1, "darkcoind-ncurses " + gm.version, color + curses.A_BOLD)
 
     if 'peers' in state:
         if state['peers'] > 0:
@@ -51,12 +53,15 @@ def draw_window(state, old_window):
             window.addstr(5, 1, "Transactions: " + str(tx_count) + " (" + str(bytes_per_tx) + " bytes/tx)")
 
             if 'coinbase_amount' in blockdata:
-                if state['mininginfo']['blocks'] < 210000:
-                    block_subsidy = 50
-                elif state['mininginfo']['blocks'] < 420000:
-                    block_subsidy = 25
+                bits = int(blockdata['bits'], 16)
+                height = blockdata['height']
 
-                if block_subsidy: # this will fail after block 420,000. TODO: stop being lazy and do it properly
+                if state['testnet'] == 1:
+                    block_subsidy = ds.GetBlockBaseValue_testnet(bits, height) / 100000000
+                else:
+                    block_subsidy = ds.GetBlockBaseValue(bits, height) / 100000000
+
+                if block_subsidy:
                     coinbase_amount = blockdata['coinbase_amount']
                     total_fees = coinbase_amount - block_subsidy # assumption, mostly correct
 
@@ -103,26 +108,27 @@ def draw_window(state, old_window):
                 window.addstr(14, 1, "Chain work: 2**" + "%0.6f" % log2_chainwork)
 
         diff = int(state['mininginfo']['difficulty'])
-        window.addstr(10, 1, "Diff:        " + "{:,d}".format(diff))
+        window.addstr(10, 1, "Difficulty:  " + "{:,d}".format(diff))
 
     for block_avg in state['networkhashps']:
         index = 10
+        interval = "now"
 
         if block_avg == 'diff':
             pass
-        elif block_avg == 2016:
+        elif block_avg == 576:
             index += 1
-        elif block_avg == 144:
+            interval = "24h"
+        elif block_avg == 24:
             index += 2
+            interval = "1h"
         else:
             break
 
         rate = state['networkhashps'][block_avg]
         if block_avg != 'diff':
-            nextdiff = (rate*600)/(2**32)
-            if state['testnet'] == 1:
-                nextdiff *= 2 # testnet has 1200 est. block interval, not 600
-            window.addstr(index, 1, "Est (" + str(block_avg).rjust(4) + "): ~" + "{:,d}".format(nextdiff))
+            nextdiff = (rate*150)/(2**32)
+            window.addstr(index, 1, "Est. (" + interval.rjust(3) + "): ~" + "{:,d}".format(nextdiff))
 
         if rate > 10**18:
             rate /= 10**18
@@ -134,7 +140,7 @@ def draw_window(state, old_window):
             rate /= 10**6
             suffix = " MH/s"
         rate_string = "{:,d}".format(rate) + suffix
-        window.addstr(index, 37, "Hashrate (" + str(block_avg).rjust(4) + "): " + rate_string.rjust(13))
+        window.addstr(index, 37, "Hashrate (" + interval.rjust(3) + "): " + rate_string.rjust(13))
         index += 1
 
     if 'totalbytesrecv' in state:

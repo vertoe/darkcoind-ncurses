@@ -8,8 +8,9 @@ import peers
 import wallet
 import splash
 import console
-import net
-import forks
+#import net
+#import forks
+import mnode
 
 def resize(s, state, window):
     if state['mode'] == 'tx':
@@ -24,8 +25,10 @@ def resize(s, state, window):
         monitor.draw_window(state, window)
     elif state['mode'] == 'console':
         console.draw_window(state, window)
-    elif state['mode'] == 'net':
-        net.draw_window(state, window)
+#    elif state['mode'] == 'net':
+#        net.draw_window(state, window)
+    elif state['mode'] == 'masternodes':
+        mnode.draw_window(state, window)
 
 def getinfo(s, state, window):
     state['version'] = str(s['getinfo']['version'] / 1000000)
@@ -73,22 +76,22 @@ def getnetworkhashps(s, state, window):
     blocks = s['getnetworkhashps']['blocks']
     state['networkhashps'][blocks] = s['getnetworkhashps']['value']
 
-    if state['mode'] == "splash" and blocks == 2016: # initialization complete
+    if state['mode'] == "splash" and blocks == 576: # initialization complete
         state['mode'] = "monitor"
         monitor.draw_window(state, window)
 
-def getnettotals(s, state, window):
-    state['totalbytesrecv'] = s['getnettotals']['totalbytesrecv']
-    state['totalbytessent'] = s['getnettotals']['totalbytessent']
-
-    state['history']['getnettotals'].append(s['getnettotals'])
-
-    # ensure getnettotals history does not fill RAM eventually, 300 items is enough
-    if len(state['history']['getnettotals']) > 500:
-        state['history']['getnettotals'] = state['history']['getnettotals'][-300:]
-
-    if state['mode'] == 'net':
-        net.draw_window(state, window)
+#def getnettotals(s, state, window):
+#    state['totalbytesrecv'] = s['getnettotals']['totalbytesrecv']
+#    state['totalbytessent'] = s['getnettotals']['totalbytessent']
+#
+#    state['history']['getnettotals'].append(s['getnettotals'])
+#
+#    # ensure getnettotals history does not fill RAM eventually, 300 items is enough
+#    if len(state['history']['getnettotals']) > 500:
+#        state['history']['getnettotals'] = state['history']['getnettotals'][-300:]
+#
+#    if state['mode'] == 'net':
+#        net.draw_window(state, window)
 
 def getmininginfo(s, state, window):
     state['mininginfo'] = s['getmininginfo']
@@ -96,7 +99,7 @@ def getmininginfo(s, state, window):
     if 'browse_height' not in state['blocks']:
         state['blocks']['browse_height'] = s['getmininginfo']['blocks']
 
-    state['networkhashps']['diff'] = (int(s['getmininginfo']['difficulty'])*2**32)/600
+    state['networkhashps']['diff'] = (int(s['getmininginfo']['difficulty'])*2**32)/150
 
 def getpeerinfo(s, state, window):
     state['peerinfo'] = s['getpeerinfo']
@@ -104,11 +107,17 @@ def getpeerinfo(s, state, window):
     if state['mode'] == "peers":
         peers.draw_window(state, window)
 
-def getchaintips(s, state, window):
-    state['chaintips'] = s['getchaintips']
-    state['chaintips_offset'] = 0
-    if state['mode'] == 'forks':
-        forks.draw_window(state, window)
+#def getchaintips(s, state, window):
+#    state['chaintips'] = s['getchaintips']
+#    state['chaintips_offset'] = 0
+#    if state['mode'] == 'forks':
+#        forks.draw_window(state, window)
+
+def masternodelist(s, state, window):
+    state['masternodes'] = s['masternodelist']
+    state['masternodes_offset'] = 0
+    if state['mode'] == 'masternodes':
+        mnode.draw_window(state, window)
 
 def listsinceblock(s, state, window):
     state['wallet'] = s['listsinceblock']
@@ -251,10 +260,11 @@ def queue(state, window, interface_queue):
         elif 'getblock' in s: getblock(s, state, window)
         elif 'coinbase' in s: coinbase(s, state, window)
         elif 'getnetworkhashps' in s: getnetworkhashps(s, state, window)
-        elif 'getnettotals' in s: getnettotals(s, state, window)
+#        elif 'getnettotals' in s: getnettotals(s, state, window)
         elif 'getmininginfo' in s: getmininginfo(s, state, window)
         elif 'getpeerinfo' in s: getpeerinfo(s, state, window)
-        elif 'getchaintips' in s: getchaintips(s, state, window)
+#        elif 'getchaintips' in s: getchaintips(s, state, window)
+        elif 'masternodelist' in s: masternodelist(s, state, window)
         elif 'listsinceblock' in s: listsinceblock(s, state, window)
         elif 'lastblocktime' in s: lastblocktime(s, state, window)
         elif 'txid' in s: txid(s, state, window)

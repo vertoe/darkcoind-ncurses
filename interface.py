@@ -48,7 +48,7 @@ def loop(interface_queue, rpc_queue):
         'console': { 'cbuffer': [], 'rbuffer': [], 'offset': 0 },
         'x': -1,
         'y': -1,
-        'history': { 'getnettotals': [] }
+#        'history': { 'getnettotals': [] }
     }
 
     splash.draw_window(state, window)
@@ -60,7 +60,7 @@ def loop(interface_queue, rpc_queue):
         if error_message:
             break # ends if stop command sent by rpc
 
-        if state['mode'] == "monitor":
+        if state['mode'] == "overview":
             if not iterations % 20:
                 monitor.draw_window(state, window)
 

@@ -205,8 +205,11 @@ def loop(interface_queue, rpc_queue, cfg):
         elif 'listsinceblock' in s:
             rpcrequest(rpchandle, 'listsinceblock', interface_queue)
 
-        elif 'getchaintips' in s:
-            rpcrequest(rpchandle, 'getchaintips', interface_queue)
+#        elif 'getchaintips' in s:
+#            rpcrequest(rpchandle, 'getchaintips', interface_queue)
+
+        elif 'masternodelist' in s:
+            rpcrequest(rpchandle, 'masternode count', interface_queue)
 
         elif 'findblockbytimestamp' in s:
             request = s['findblockbytimestamp']
@@ -238,7 +241,7 @@ def loop(interface_queue, rpc_queue, cfg):
             update_time = time.time()
             log('debug.log', 1, 'updating (' + "%.3f" % (time.time() - last_update) + 's since last)')
 
-            rpcrequest(rpchandle, 'getnettotals', interface_queue)
+#            rpcrequest(rpchandle, 'getnettotals', interface_queue)
             rpcrequest(rpchandle, 'getconnectioncount', interface_queue)
             mininginfo = rpcrequest(rpchandle, 'getmininginfo', interface_queue)
             rpcrequest(rpchandle, 'getbalance', interface_queue)
@@ -273,10 +276,10 @@ def loop(interface_queue, rpc_queue, cfg):
                         except: pass
 
                     try:
-                        nethash144 = rpcrequest(rpchandle, 'getnetworkhashps', False, 144)
-                        nethash2016 = rpcrequest(rpchandle, 'getnetworkhashps', False, 2016)
-                        interface_queue.put({'getnetworkhashps': {'blocks': 144, 'value': nethash144}})
-                        interface_queue.put({'getnetworkhashps': {'blocks': 2016, 'value': nethash2016}})
+                        nethash24 = rpcrequest(rpchandle, 'getnetworkhashps', False, 24)
+                        nethash576 = rpcrequest(rpchandle, 'getnetworkhashps', False, 576)
+                        interface_queue.put({'getnetworkhashps': {'blocks': 24, 'value': nethash24}})
+                        interface_queue.put({'getnetworkhashps': {'blocks': 576, 'value': nethash576}})
                     except: pass
 
                     try:

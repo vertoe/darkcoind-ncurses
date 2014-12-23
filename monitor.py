@@ -14,11 +14,11 @@ def draw_window(state, old_window):
 
     if 'version' in state:
         if state['testnet'] == 1:
-            color = curses.color_pair(2)
+            color = curses.color_pair(3)
             window.addstr(1, 1, "darkcoind v" + state['version'] + " (testnet)", color + curses.A_BOLD)
             unit = 'tDRK'
         else:
-            color = curses.color_pair(1)
+            color = curses.color_pair(2)
             window.addstr(1, 1, "darkcoind v" + state['version'] + " ", color + curses.A_BOLD)
             unit = 'DRK'
         window.addstr(0, 1, "darkcoind-ncurses " + gm.version, color + curses.A_BOLD)

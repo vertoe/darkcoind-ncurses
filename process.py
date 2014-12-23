@@ -21,7 +21,7 @@ def resize(s, state, window):
         peers.draw_window(state, window)
     elif state['mode'] == 'wallet':
         wallet.draw_window(state, window)
-    elif state['mode'] == 'monitor':
+    elif state['mode'] == 'overview':
         monitor.draw_window(state, window)
     elif state['mode'] == 'console':
         console.draw_window(state, window)
@@ -57,7 +57,7 @@ def getblock(s, state, window):
 
     state['blocks'][str(height)] = s['getblock']
 
-    if state['mode'] == "monitor":
+    if state['mode'] == "overview":
         monitor.draw_window(state, window)
     if state['mode'] == "block":
         if 'queried' in s['getblock']:
@@ -77,7 +77,7 @@ def getnetworkhashps(s, state, window):
     state['networkhashps'][blocks] = s['getnetworkhashps']['value']
 
     if state['mode'] == "splash" and blocks == 576: # initialization complete
-        state['mode'] = "monitor"
+        state['mode'] = "overview"
         monitor.draw_window(state, window)
 
 #def getnettotals(s, state, window):

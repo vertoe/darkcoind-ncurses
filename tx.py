@@ -145,9 +145,9 @@ def draw_outputs(state):
     win_outputs.refresh()
 
 def draw_input_window(state, window, rpc_queue):
-    color = curses.color_pair(1)
+    color = curses.color_pair(2)
     if 'testnet' in state:
-        if state['testnet']: color = curses.color_pair(2)
+        if state['testnet']: color = curses.color_pair(3)
 
     window.clear()
     window.addstr(0, 1, "darkcoind-ncurses " + g.version + " [transaction input mode]", color + curses.A_BOLD)

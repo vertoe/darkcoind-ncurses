@@ -50,17 +50,17 @@ def draw_buffer(state):
                 if len(line) > 1:
                     if line[1] == ">":
                         if state['testnet']:
-                            fmt = curses.color_pair(2) + curses.A_BOLD
+                            fmt = curses.color_pair(3) + curses.A_BOLD
                         else:
-                            fmt = curses.color_pair(1) + curses.A_BOLD
+                            fmt = curses.color_pair(2) + curses.A_BOLD
 
                 if len(line) > state['x']-1:
                     win_buffer.addstr(window_height-(index-offset)-1, 1, line[:(state['x']-5)] + ' ...', fmt)
                 else:
                     win_buffer.addstr(window_height-(index-offset)-1, 1, line, fmt)
-        elif index == offset and index: 
+        elif index == offset and index:
             win_buffer.addstr(window_height-(index-offset)-1, 1, "...")
- 
+
     win_buffer.refresh()
 
 def draw_input_box(state, rpc_queue):

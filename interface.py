@@ -48,7 +48,7 @@ def loop(interface_queue, rpc_queue):
         'console': { 'cbuffer': [], 'rbuffer': [], 'offset': 0 },
         'x': -1,
         'y': -1,
-#        'history': { 'getnettotals': [] }
+        'history': { 'getnettotals': [] }
     }
 
     splash.draw_window(state, window)

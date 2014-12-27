@@ -52,7 +52,7 @@ def draw_peers(state):
                 addr_str = (addr_str[:14] + '...') if len(addr_str) > 17 else addr_str
 
                 win_peers.addstr(index-offset, 3, addr_str)
-                win_peers.addstr(index-offset, 21, peer['subver'].strip("/").replace("Satoshi:","Sat ").replace("Duffield:","Duf ")[:14])
+                win_peers.addstr(index-offset, 21, peer['subver'].strip("/").replace("Satoshi:","Sat ").replace("Duffield:","Duf ").replace("Core:","Cor ")[:14])
 
                 mbrecv = "% 7.1f" % ( float(peer['bytesrecv']) / 1048576 )
                 mbsent = "% 7.1f" % ( float(peer['bytessent']) / 1048576 )

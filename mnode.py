@@ -10,7 +10,7 @@ def draw_window(state, window):
 
     win_header = curses.newwin(3, 75, 0, 0)
 
-    if 'masternodes' in state:
+    if 'mnodes' in state:
         win_header.addstr(0, 1, "masternode information successfully loaded", curses.A_BOLD + curses.color_pair(2))
 
     else:

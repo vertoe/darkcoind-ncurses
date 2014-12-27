@@ -205,11 +205,11 @@ def loop(interface_queue, rpc_queue, cfg):
         elif 'listsinceblock' in s:
             rpcrequest(rpchandle, 'listsinceblock', interface_queue)
 
-#        elif 'getchaintips' in s:
-#            rpcrequest(rpchandle, 'getchaintips', interface_queue)
+        elif 'getchaintips' in s:
+            rpcrequest(rpchandle, 'getchaintips', interface_queue)
 
-        elif 'masternodelist' in s:
-            rpcrequest(rpchandle, 'masternode count', interface_queue)
+        elif 'masternode' in s:
+            rpcrequest(rpchandle, 'masternode', interface_queue)
 
         elif 'findblockbytimestamp' in s:
             request = s['findblockbytimestamp']
@@ -241,7 +241,7 @@ def loop(interface_queue, rpc_queue, cfg):
             update_time = time.time()
             log('debug.log', 1, 'updating (' + "%.3f" % (time.time() - last_update) + 's since last)')
 
-#            rpcrequest(rpchandle, 'getnettotals', interface_queue)
+            rpcrequest(rpchandle, 'getnettotals', interface_queue)
             rpcrequest(rpchandle, 'getconnectioncount', interface_queue)
             mininginfo = rpcrequest(rpchandle, 'getmininginfo', interface_queue)
             rpcrequest(rpchandle, 'getbalance', interface_queue)

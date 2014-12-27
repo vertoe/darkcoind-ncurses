@@ -49,6 +49,8 @@ def draw_peers(state):
                         win_peers.addstr(index-offset, 1, 'S')
 
                 addr_str = peer['addr'].strip("[").strip("]").replace(".onion","").replace(":9999","").replace(":19999","")
+
+                # truncate long ip addresses (ipv6)
                 addr_str = (addr_str[:14] + '...') if len(addr_str) > 17 else addr_str
 
                 win_peers.addstr(index-offset, 3, addr_str)

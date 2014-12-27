@@ -1,4 +1,4 @@
-darkcoind-ncurses v0.0.22
+darkcoind-ncurses v0.0.23
 =========================
 
 ncurses front-end for darkcoind
@@ -9,6 +9,7 @@ ncurses front-end for darkcoind
 ![ScreenShot](/screenshots/bitcoind-ncurses-tx.png)
 ![ScreenShot](/screenshots/bitcoind-ncurses-peers.png)
 ![ScreenShot](/screenshots/bitcoind-ncurses-wallet.png)
+![ScreenShot](/screenshots/bitcoind-ncurses-net.png)
 ![ScreenShot](/screenshots/bitcoind-ncurses-console.png)
 
 * produced by Amphibian (azeteki, Atelopus_zeteki).

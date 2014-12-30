@@ -67,8 +67,11 @@ def draw_window(state, old_window):
 
                     if coinbase_amount > 0:
                         fee_percentage = "%0.2f" % ((total_fees / coinbase_amount) * 100)
+                        fee_percentage = "0.00" if (total_fees / coinbase_amount) < 0 else fee_percentage
                         coinbase_amount_str = "%0.8f" % coinbase_amount
+                        block_subsidy_str = "%0.8f" % block_subsidy
                         window.addstr(7, 1, "Total block reward: " + coinbase_amount_str + " " + unit + " (" + fee_percentage + "% fees)")
+                        #window.addstr(8, 1, "DEBUG Coinbase amount: " + coinbase_amount_str + " (Block subsidy: " + block_subsidy_str + ")")
 
                     if tx_count > 1:
                         tx_count -= 1 # the coinbase can't pay a fee
@@ -77,8 +80,8 @@ def draw_window(state, old_window):
                         total_fees_str = "%0.8f" % total_fees + " " + unit
                         fees_per_tx = "%0.5f" % fees_per_tx + " m" + unit + "/tx"
                         fees_per_kb = "%0.5f" % fees_per_kb + " m" + unit + "/KB"
-                        window.addstr(8, 1, "Fees: " + total_fees_str + " (avg " +  fees_per_tx + ", ~" + fees_per_kb + ")")
-
+                        if total_fees > 0:
+                            window.addstr(8, 1, "Fees: " + total_fees_str + " (avg " +  fees_per_tx + ", ~" + fees_per_kb + ")")
 
             window.addstr(4, 37, "Block timestamp: " + time.strftime("%Y-%m-%d %H:%M:%S", time.gmtime(blockdata['time'])))
 
@@ -107,8 +110,8 @@ def draw_window(state, old_window):
                 log2_chainwork = math.log(int(blockdata['chainwork'], 16), 2)
                 window.addstr(14, 1, "Chain work: 2**" + "%0.6f" % log2_chainwork)
 
-        diff = int(state['mininginfo']['difficulty'])
-        window.addstr(10, 1, "Difficulty:  " + "{:,d}".format(diff))
+        diff = float(state['mininginfo']['difficulty'])
+        window.addstr(10, 1, "Difficulty:  " + "{:,f}".format(diff))
 
     for block_avg in state['networkhashps']:
         index = 10
@@ -128,7 +131,7 @@ def draw_window(state, old_window):
         rate = state['networkhashps'][block_avg]
         if block_avg != 'diff':
             nextdiff = (rate*150)/(2**32)
-            window.addstr(index, 1, "Est. (" + interval.rjust(3) + "): ~" + "{:,d}".format(nextdiff))
+            window.addstr(index, 1, "Est. (" + interval.rjust(3) + "): ~" + "{:,f}".format(nextdiff))
 
         if rate > 10**18:
             rate /= 10**18
@@ -136,9 +139,12 @@ def draw_window(state, old_window):
         elif rate > 10**12:
             rate /= 10**12
             suffix = " TH/s"
-        else:
+        elif rate > 10**6:
             rate /= 10**6
             suffix = " MH/s"
+        else:
+            rate /= 10**3
+            suffix = " kH/s"
         rate_string = "{:,d}".format(rate) + suffix
         window.addstr(index, 37, "Hashrate (" + interval.rjust(3) + "): " + rate_string.rjust(13))
         index += 1

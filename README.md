@@ -15,13 +15,15 @@ ncurses front-end for darkcoind
 * produced by Amphibian (azeteki, Atelopus_zeteki).
 * ported for darkcoind by Vertoe (vertoe).
 
+
 dependencies
 ------------
 
-* tested with python 2.7.9, darkcoind 0.10.17.24
+* tested with python 2.7.9, darkcoind 0.11.0.0
 * jgarzik's bitcoinrpc library port for darkcoin (https://github.com/vertoe/python-darkcoinrpc)
-* chaeplin's darkcoin subsidy library (https://github.com/vertoe/p2pool-drk/tree/master/darkcoin-subsidy-python)
+* chaeplin's darkcoin subsidy library, latest version by vertoe (https://github.com/vertoe/darkcoin_subsidy)
 * (Windows only) python ncurses library (http://www.lfd.uci.edu/~gohlke/pythonlibs/#curses)
+
 
 features
 --------
@@ -32,6 +34,7 @@ features
 * view transactions from your wallet - txid, amounts, cumulative balance
 * view connected peers
 * basic debug console functionality (only for testnet use at present)
+
 
 usage
 -----
@@ -47,6 +50,7 @@ testnet=0
 
 this is an early development release. expect (safe) breakage
 
+
 launch
 ------
 
@@ -56,13 +60,14 @@ $ python main.py
 $ python main.py -c some_other_config_file.conf
 ```
 
+
 todo
 ----
 
-* ensure terminal always returns to sane state on program exit
 * mean block size/tx count over last X blocks
 * transaction creation support (if I feel suicidal)
 * more testing for edge cases (paramount for above)
+
 
 frog food
 ---------

@@ -54,7 +54,7 @@ def draw_peers(state):
                 addr_str = (addr_str[:14] + '...') if len(addr_str) > 17 else addr_str
 
                 win_peers.addstr(index-offset, 3, addr_str)
-                win_peers.addstr(index-offset, 21, peer['subver'].strip("/").replace("Satoshi:","Sat ").replace("Duffield:","Duf ").replace("Core:","Cor ")[:14])
+                win_peers.addstr(index-offset, 21, peer['subver'].strip("/").replace("Satoshi:","Sat ").replace("Duffield:","Duf ").replace("Core:","Cor ").replace("P2Pool:","P2P ").replace("Darkcoil:","Col ")[:14])
 
                 mbrecv = "% 7.1f" % ( float(peer['bytesrecv']) / 1048576 )
                 mbsent = "% 7.1f" % ( float(peer['bytessent']) / 1048576 )
@@ -79,6 +79,6 @@ def draw_peers(state):
                 win_peers.addstr(index-offset, 55, time_string.rjust(12))
 
                 if 'startingheight' in peer:
-                    win_peers.addstr(index-offset, 69, str(peer['startingheight']).rjust(6))
+                    win_peers.addstr(index-offset, 68, str(peer['startingheight']).rjust(6))
 
     win_peers.refresh()
